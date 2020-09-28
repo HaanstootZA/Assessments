@@ -12,6 +12,7 @@ namespace Assessment.Ozow.Sorting
 
             void onCancelKeyPress(object sender, ConsoleCancelEventArgs args)
             {
+                args.Cancel = true;
                 cancellationTokenSource.Cancel();
                 cancellationTokenSource.Token.ThrowIfCancellationRequested();
             };

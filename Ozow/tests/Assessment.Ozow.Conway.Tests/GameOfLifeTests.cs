@@ -49,6 +49,15 @@ namespace Assessment.Ozow.Conway.Tests
             Assert.AreEqual(Boards.BLINKER_GEN_0, enumerator.Current);
         }
 
+        [TestMethod]
+        public void TestEnumeratorRepeats()
+        {
+            GameOfLife gameOfLife = new GameOfLife(Boards.BLINKER_GEN_0, 0);
+
+            IEnumerator<Board> enumerator = gameOfLife.GetEnumerator();
+            Assert.IsFalse(enumerator.MoveNext());
+        }
+
         [TestMethod, ExpectedException(typeof(NotImplementedException))]
         public void TestEnumeratorReset()
         {

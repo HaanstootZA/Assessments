@@ -50,7 +50,7 @@ namespace Assessment.Ozow.Conway
 
             public bool MoveNext()
             {
-                if (this.currentGeneration > maximumGenerations)
+                if (this.currentGeneration >= maximumGenerations)
                 {
                     return false;
                 }
@@ -63,6 +63,7 @@ namespace Assessment.Ozow.Conway
                 });
 
                 this.Current = newCanvas;
+                this.currentGeneration += 1;
                 return true;
             }
 
