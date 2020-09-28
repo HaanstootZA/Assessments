@@ -55,15 +55,19 @@ namespace Assessment.Ozow.Conway
                     return false;
                 }
 
-                Board newCanvas = new Board(this.Current.Size);
-                this.Current.Traverse((p, isAlive) =>
+                if(this.currentGeneration > 0)
                 {
-                    int livingNeighbourCount = this.GetLivingNeighbourCount(p);
-                    newCanvas[p] = (isAlive && livingNeighbourCount == 2) || livingNeighbourCount == 3;
-                });
+                    Board newCanvas = new Board(this.Current.Size);
+                    this.Current.Traverse((p, isAlive) =>
+                    {
+                        int livingNeighbourCount = this.GetLivingNeighbourCount(p);
+                        newCanvas[p] = (isAlive && livingNeighbourCount == 2) || livingNeighbourCount == 3;
+                    });
 
-                this.Current = newCanvas;
+                    this.Current = newCanvas;
+                }
                 this.currentGeneration += 1;
+
                 return true;
             }
 
