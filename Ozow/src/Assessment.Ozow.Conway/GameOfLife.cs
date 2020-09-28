@@ -7,21 +7,16 @@ using System.Text;
 
 namespace Assessment.Ozow.Conway
 {
-    public class GameOfLife : IEnumerable<bool[,]>
+    public sealed class GameOfLife : IEnumerable<Board>, IDisposable
     {
         private BoardEnumerator boardEnumerator;
 
-        public GameOfLife(bool[,] seedBoard, int maximumGenerations)
+        public GameOfLife(Board seedBoard, int maximumGenerations)
         {
-            if (seedBoard is null)
-            {
-                throw new ArgumentNullException(nameof(seedBoard));
-            }
-
             this.boardEnumerator = new BoardEnumerator(seedBoard, maximumGenerations);
         }
 
-        public IEnumerator<bool[,]> GetEnumerator()
+        public IEnumerator<Board> GetEnumerator()
         {
             return this.boardEnumerator;
         }
@@ -31,21 +26,23 @@ namespace Assessment.Ozow.Conway
             return this.GetEnumerator();
         }
 
-        private class BoardEnumerator : IEnumerator<bool[,]>
+        public void Dispose()
         {
-            private readonly int width;
-            private readonly int height;
+            this.boardEnumerator.Dispose();
+        }
+
+        private class BoardEnumerator : IEnumerator<Board>
+        {
             private readonly int maximumGenerations;
             private int currentGeneration;
 
-            public bool[,] Current { get; private set; }
+            public Board Current { get; private set; }
+
             object IEnumerator.Current { get => this.Current; }
 
-            public BoardEnumerator(bool[,] seedBoard, int maximumGenerations)
+            public BoardEnumerator(Board seedBoard, int maximumGenerations)
             {
                 this.Current = seedBoard;
-                this.width = seedBoard.GetLength(0);
-                this.height = seedBoard.GetLength(1);
 
                 this.currentGeneration = 0;
                 this.maximumGenerations = maximumGenerations;
@@ -53,21 +50,17 @@ namespace Assessment.Ozow.Conway
 
             public bool MoveNext()
             {
-                if(this.currentGeneration > maximumGenerations)
+                if (this.currentGeneration > maximumGenerations)
                 {
                     return false;
                 }
 
-                bool[,] newCanvas = new bool[this.width, this.height];
-                //x * y * 3 * 3
-                for (int x = 0; x < this.width; x++)
+                Board newCanvas = new Board(this.Current.Size);
+                this.Current.Traverse((p, isAlive) =>
                 {
-                    for (int y = 0; y < this.height; y++)
-                    {
-                        int livingNeighbourCount = this.GetLivingNeighbourCount(new Point(x, y));
-                        newCanvas[x, y] = (this.Current[x, y] && livingNeighbourCount == 2) || livingNeighbourCount == 3;
-                    }
-                }
+                    int livingNeighbourCount = this.GetLivingNeighbourCount(p);
+                    newCanvas[p] = (isAlive && livingNeighbourCount == 2) || livingNeighbourCount == 3;
+                });
 
                 this.Current = newCanvas;
                 return true;
@@ -78,18 +71,18 @@ namespace Assessment.Ozow.Conway
                 int result = 0;
                 for (int x = currentCell.X - 1; x < currentCell.X + 2; x++)
                 {
-                    if (x < 0 || x >= this.width)
+                    if (x < 0 || x >= this.Current.Size.Width)
                     {
                         continue;
                     }
                     for (int y = currentCell.Y - 1; y < currentCell.Y + 2; y++)
                     {
-                        if(x == currentCell.X && y == currentCell.Y)
+                        if (x == currentCell.X && y == currentCell.Y)
                         {
                             continue;
                         }
 
-                        if (y >= 0 && y < this.height && this.Current[x, y])
+                        if (y >= 0 && y < this.Current.Size.Height && this.Current[x, y])
                         {
                             result += 1;
                         }
@@ -105,7 +98,7 @@ namespace Assessment.Ozow.Conway
 
             public void Dispose()
             {
-                this.Current = null;
+                //NOTHING
             }
         }
     }

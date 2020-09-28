@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Assessment.Ozow\Assessment.Ozow.Conway\Assessment.Ozow.Conway.csproj" />
+    <ProjectReference Include="..\..\src\Assessment.Ozow.Conway\Assessment.Ozow.Conway.csproj" />
   </ItemGroup>
 
 </Project>

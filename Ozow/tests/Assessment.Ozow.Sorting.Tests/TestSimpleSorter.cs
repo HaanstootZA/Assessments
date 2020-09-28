@@ -1,10 +1,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace Assessment.Ozow.Sorting.Tests
 {
-    [TestClass]
+    [TestClass, ExcludeFromCodeCoverage]
     public class TestSimpleSorter
     {
         private const string EXPECTED_OUTPUT = "aaabcceeeeeffhiiiiklllnnnnooooppprrrrssttttuuyzz";

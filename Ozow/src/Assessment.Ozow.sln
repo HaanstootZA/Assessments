@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assessment.Ozow.Sorting", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ECDC720A-5596-4BDF-B5FE-1F64A5D27DF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assessment.Ozow.Sorting.Tests", "..\tests\Assessment.Ozow.Sorting.Tests\Assessment.Ozow.Sorting.Tests\Assessment.Ozow.Sorting.Tests.csproj", "{E945F80F-4BF4-4FB1-9AC7-D00DCBA90794}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assessment.Ozow.Sorting.Tests", "..\tests\Assessment.Ozow.Sorting.Tests\Assessment.Ozow.Sorting.Tests.csproj", "{E945F80F-4BF4-4FB1-9AC7-D00DCBA90794}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assessment.Ozow.Conway.Tests", "..\tests\Assessment.Ozow.Conway.Tests\Assessment.Ozow.Conway.Tests.csproj", "{07337F95-C33F-410B-A8F1-FD70AC554DB9}"
 EndProject
