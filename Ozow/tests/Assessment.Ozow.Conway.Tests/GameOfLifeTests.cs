@@ -40,15 +40,13 @@ namespace Assessment.Ozow.Conway.Tests
         [TestMethod]
         public void TestEnumerator()
         {
-            GameOfLife gameOfLife = new GameOfLife(Boards.BLINKER_GEN_0, 2);
+            GameOfLife gameOfLife = new GameOfLife(Boards.BLINKER_GEN_0, 3);
             IEnumerator<Board> enumerator = gameOfLife.GetEnumerator();
-            enumerator.MoveNext();
+            Assert.IsTrue(enumerator.MoveNext());
             Assert.AreEqual(Boards.BLINKER_GEN_0, enumerator.Current);
-
-            enumerator.MoveNext();
+            Assert.IsTrue(enumerator.MoveNext());
             Assert.AreEqual(Boards.BLINKER_GEN_1, enumerator.Current);
-
-            enumerator.MoveNext();
+            Assert.IsTrue(enumerator.MoveNext());
             Assert.AreEqual(Boards.BLINKER_GEN_0, enumerator.Current);
         }
 
