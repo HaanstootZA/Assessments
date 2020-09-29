@@ -43,6 +43,9 @@ namespace Assessment.Ozow.Conway.Tests
             GameOfLife gameOfLife = new GameOfLife(Boards.BLINKER_GEN_0, 2);
             IEnumerator<Board> enumerator = gameOfLife.GetEnumerator();
             enumerator.MoveNext();
+            Assert.AreEqual(Boards.BLINKER_GEN_0, enumerator.Current);
+
+            enumerator.MoveNext();
             Assert.AreEqual(Boards.BLINKER_GEN_1, enumerator.Current);
 
             enumerator.MoveNext();

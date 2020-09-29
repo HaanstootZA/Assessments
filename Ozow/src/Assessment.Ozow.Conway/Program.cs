@@ -97,7 +97,7 @@ namespace Assessment.Ozow.Conway
                 if (value)
                 {
                     finished = false;
-                    Console.Write("0");
+                     Console.Write("0");
                 }
                 else
                 {
