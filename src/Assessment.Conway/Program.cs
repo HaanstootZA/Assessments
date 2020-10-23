@@ -1,13 +1,11 @@
-﻿using System;
+using System;
 using System.Drawing;
-using System.Dynamic;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Threading;
 
 namespace Assessment.Conway
 {
-    public partial class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -17,7 +15,6 @@ namespace Assessment.Conway
             {
                 args.Cancel = true;
                 cancellationTokenSource.Cancel();
-                cancellationTokenSource.Token.ThrowIfCancellationRequested();
             };
             Console.CancelKeyPress += onCancelKeyPress;
 
@@ -34,6 +31,11 @@ namespace Assessment.Conway
                 {
                     foreach (Board board in gameOfLife)
                     {
+                        if(cancellationTokenSource.IsCancellationRequested)
+                        {
+                            break;
+                        }
+
                         Console.Clear();
                         if (OutputBoard(board))
                         {
@@ -97,7 +99,7 @@ namespace Assessment.Conway
                 if (value)
                 {
                     finished = false;
-                     Console.Write("0");
+                    Console.Write("0");
                 }
                 else
                 {
