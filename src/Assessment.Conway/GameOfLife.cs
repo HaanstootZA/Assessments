@@ -1,15 +1,13 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Dynamic;
-using System.Text;
 
 namespace Assessment.Conway
 {
     public sealed class GameOfLife : IEnumerable<Board>, IDisposable
     {
-        private BoardEnumerator boardEnumerator;
+        private readonly BoardEnumerator boardEnumerator;
 
         public GameOfLife(Board seedBoard, int maximumGenerations)
         {
@@ -31,7 +29,7 @@ namespace Assessment.Conway
             this.boardEnumerator.Dispose();
         }
 
-        private class BoardEnumerator : IEnumerator<Board>
+        private sealed class BoardEnumerator : IEnumerator<Board>
         {
             private readonly int maximumGenerations;
             private int currentGeneration;
@@ -55,7 +53,7 @@ namespace Assessment.Conway
                     return false;
                 }
 
-                if(this.currentGeneration > 0)
+                if (this.currentGeneration > 0)
                 {
                     Board newCanvas = new Board(this.Current.Size);
                     this.Current.Traverse((p, isAlive) =>
