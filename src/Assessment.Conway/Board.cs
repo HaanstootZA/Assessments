@@ -1,13 +1,11 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
 using System;
-using System.Collections;
 using System.Drawing;
 
 namespace Assessment.Conway
 {
-    public struct Board
+    public readonly struct Board
     {
-        private bool[,] board;
+        private readonly bool[,] board;
 
         public Size Size { get; }
 
@@ -48,11 +46,7 @@ namespace Assessment.Conway
 
         public override bool Equals(object obj)
         {
-            if (object.ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-            if(obj is null || obj.GetType() != typeof(Board))
+            if (!(obj is Board))
             {
                 return false;
             }
